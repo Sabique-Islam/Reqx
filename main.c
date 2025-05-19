@@ -261,7 +261,7 @@ static enum MHD_Result answer(void *cls, struct MHD_Connection *conn,
 
 int main(int argc, char *argv[]) {
     int port = PORT;
-    
+
     char *env_port = getenv("PORT");
     if (env_port) {
         port = atoi(env_port);
@@ -299,8 +299,10 @@ int main(int argc, char *argv[]) {
     }
 
     printf("Listening on port %d...\n", port);
-    printf("Press Enter to stop the server\n");
-    getchar();
+    
+    while (1) {
+        sleep(1);
+    }
 
     MHD_stop_daemon(daemon);
     return 0;
