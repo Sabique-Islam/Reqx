@@ -4,7 +4,7 @@
 #include <string.h>
 #include "include/friend.h"
 
-#define PORT 8080
+#define PORT 8081
 #define POSTBUFFERSIZE 512
 #define MAX_RESPONSE 4096
 
@@ -60,6 +60,10 @@ static enum MHD_Result answer(void *cls, struct MHD_Connection *conn,
             *con_cls = &DUMMY_POINTER;
             return MHD_YES;
         }
+    }
+
+    if (0 == strcmp(method, "GET") && 0 == strcmp(url, "/health")) {
+        return send_json(conn, "{\"status\": \"healthy\"}", MHD_HTTP_OK);
     }
 
     if (0 == strcmp(method, "GET") && 0 == strcmp(url, "/friends")) {

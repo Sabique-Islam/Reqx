@@ -17,12 +17,12 @@ A RESTful API built in `C` using `libmicrohttpd` and `cJSON`.
 
 ### Get All Friends
 ```bash
-curl http://localhost:8080/friends
+curl http://localhost:8081/friends
 ```
 
 ### Add a Friend
 ```bash
-curl -X POST http://localhost:8080/friend \
+curl -X POST http://localhost:8081/friend \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Gandalf",
@@ -34,12 +34,12 @@ curl -X POST http://localhost:8080/friend \
 
 ### Get a Specific Friend
 ```bash
-curl "http://localhost:8080/friend?id=gandalfthegrey@gmail.com"
+curl "http://localhost:8081/friend?id=gandalfthegrey@gmail.com"
 ```
 
 ### Update a Friend
 ```bash
-curl -X PUT http://localhost:8080/friend \
+curl -X PUT http://localhost:8081/friend \
   -H "Content-Type: application/json" \
   -d '{
     "name": "Gandalf",
@@ -51,7 +51,12 @@ curl -X PUT http://localhost:8080/friend \
 
 ### Delete a Friend
 ```bash
-curl -X DELETE "http://localhost:8080/friend?id=gandalfthegrey@gmail.com"
+curl -X DELETE "http://localhost:8081/friend?id=gandalfthegrey@gmail.com"
+```
+
+### Health Check
+```bash
+curl http://localhost:8081/health
 ```
 
 ## Data Structure →
