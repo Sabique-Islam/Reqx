@@ -1,0 +1,7 @@
+[build]
+builder = "dockerfile"
+
+[deploy]
+startCommand = "./reqx $PORT"
+healthcheckPath = "/friends"
+healthcheckTimeout = 10
