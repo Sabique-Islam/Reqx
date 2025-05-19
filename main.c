@@ -269,6 +269,9 @@ int main(int argc, char *argv[]) {
     char *env_port = getenv("PORT");
     if (env_port) {
         port = atoi(env_port);
+        printf("Using PORT from environment: %d\n", port);
+    } else {
+        printf("Using default PORT: %d\n", port);
     }
 
     struct MHD_Daemon *daemon;
@@ -293,7 +296,7 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY, port, NULL, NULL,
+    daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY | MHD_USE_IPv6, port, NULL, NULL,
                               &answer, NULL,
                               MHD_OPTION_NOTIFY_COMPLETED, &free_post_data, NULL,
                               MHD_OPTION_END);
@@ -302,7 +305,8 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    printf("Listening on port %d...\n", port);
+    printf("Server started successfully on port %d\n", port);
+    printf("Health endpoint available at: http://localhost:%d/health\n", port);
     
     while (1) {
         sleep(1);

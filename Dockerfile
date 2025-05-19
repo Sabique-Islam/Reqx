@@ -23,7 +23,7 @@ RUN mkdir -p data && \
 EXPOSE 8081
 
 ENV PORT=8081
-CMD ./reqx $PORT
+CMD ./reqx
 
 HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 \
-  CMD curl -f http://localhost:8081/health || exit 1
+  CMD curl -f http://localhost:$PORT/health || exit 1

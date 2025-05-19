@@ -2,6 +2,7 @@
 builder = "dockerfile"
 
 [deploy]
-startCommand = "./reqx $PORT"
+startCommand = "./reqx"
 healthcheckPath = "/health"
 healthcheckTimeout = 10
+startupTimeout = 60
