@@ -296,9 +296,12 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY | MHD_USE_IPv6, port, NULL, NULL,
+    // Use MHD_USE_ALL_INTERFACES to bind to all interfaces
+    // Use MHD_USE_DEBUG to get more verbose output
+    daemon = MHD_start_daemon(MHD_USE_SELECT_INTERNALLY | MHD_USE_DEBUG, port, NULL, NULL,
                               &answer, NULL,
                               MHD_OPTION_NOTIFY_COMPLETED, &free_post_data, NULL,
+                              MHD_OPTION_CONNECTION_TIMEOUT, (unsigned int) 120,
                               MHD_OPTION_END);
     if (!daemon) {
         fprintf(stderr, "Error: Could not start server on port %d\n", port);
@@ -306,7 +309,7 @@ int main(int argc, char *argv[]) {
     }
 
     printf("Server started successfully on port %d\n", port);
-    printf("Health endpoint available at: http://localhost:%d/health\n", port);
+    printf("Health endpoint available at: http://0.0.0.0:%d/health\n", port);
     
     while (1) {
         sleep(1);
