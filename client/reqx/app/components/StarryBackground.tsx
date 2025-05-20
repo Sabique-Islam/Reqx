@@ -32,8 +32,9 @@ const StarryBackground: React.FC = () => {
     if (!ctx) return
 
     const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+      if (!canvasRef.current) return
+      canvasRef.current.width = window.innerWidth
+      canvasRef.current.height = window.innerHeight
       initStars()
     }
 
@@ -41,6 +42,8 @@ const StarryBackground: React.FC = () => {
     handleResize()
 
     function initStars() {
+      if (!canvasRef.current) return
+      const canvas = canvasRef.current
       const starCount = Math.floor((canvas.width * canvas.height) / 18000) // Further reduced density for subtlety
       starsRef.current = []
 
@@ -86,7 +89,8 @@ const StarryBackground: React.FC = () => {
     }
 
     function animate() {
-      if (!canvas || !ctx) return
+      if (!canvasRef.current || !ctx) return
+      const canvas = canvasRef.current
 
       ctx.fillStyle = 'rgba(12, 18, 34, 0.15)'
       ctx.fillRect(0, 0, canvas.width, canvas.height)
