@@ -22,7 +22,7 @@ const Navbar = () => {
             px-4 sm:px-6 md:px-8
           "
         >
-          <div className="flex items-center justify-start">
+          <div className="flex items-center justify-between w-full">
             {/* Logo */}
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
@@ -37,6 +37,22 @@ const Navbar = () => {
                 </div>
               </Link>
             </div>
+
+            {/* Get Started Button */}
+            <Link 
+              href="/friends" 
+              className="
+                bg-gradient-to-r from-blue-500 to-purple-600
+                hover:from-blue-600 hover:to-purple-700
+                text-white font-semibold
+                px-6 py-2
+                rounded-full
+                transition-all duration-200
+                text-sm sm:text-base
+              "
+            >
+              Get Started
+            </Link>
           </div>
         </div>
       </div>
