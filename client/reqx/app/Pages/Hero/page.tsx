@@ -16,7 +16,7 @@ export default function Hero() {
           <h1
             className="text-5xl sm:text-6xl md:text-7xl font-bold mb-8 bg-gradient-to-r from-blue-300 via-gray-500 to-blue-800 bg-clip-text text-transparent leading-tight mt-0"
           >
-            Connect<br className="md:hidden" /> Your World
+            Connect<br className="md:hidden" /> To The World
           </h1>
           <p
             className="text-lg sm:text-xl md:text-2xl text-gray-300 mb-10 max-w-lg"
