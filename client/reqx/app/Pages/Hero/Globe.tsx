@@ -1,5 +1,4 @@
 "use client"
-import { motion } from "framer-motion"
 import dynamic from "next/dynamic"
 
 const World = dynamic(() => import("@/components/ui/globe").then((m) => m.World), {
@@ -395,16 +394,11 @@ export default function Globe() {
 
   return (
     <div className="absolute inset-0 w-full h-full overflow-hidden">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5 }}
-        className="w-full h-full flex items-center justify-center"
-      >
+      <div className="w-full h-full flex items-center justify-center">
         <div className="w-full h-full rounded-full">
           <World data={sampleArcs} globeConfig={globeConfig} />
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

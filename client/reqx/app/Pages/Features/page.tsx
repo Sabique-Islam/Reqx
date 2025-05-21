@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import Image from 'next/image';
 import StarryBackground from '../../components/StarryBackground';
+import { PlusCircle, Search, Edit, Trash2, BarChart3 } from 'lucide-react';
 
 const FeatureCard = ({
   title,
@@ -15,37 +15,22 @@ const FeatureCard = ({
   icon: React.ReactNode;
 }) => {
   return (
-    <motion.div
+    <div
       className="bg-[#0f1a33]/80 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-blue-900/30 h-full"
-      whileHover={{
-        y: -8,
-        boxShadow:
-          '0 25px 30px -5px rgba(0, 0, 0, 0.2), 0 15px 15px -5px rgba(0, 0, 0, 0.1)',
-        borderColor: 'rgba(59, 130, 246, 0.5)',
-      }}
-      transition={{ type: 'spring', stiffness: 300 }}
     >
-      <div className="text-blue-400 mb-5 text-3xl">{icon}</div>
+      <div className="text-blue-400 mb-5 flex items-center justify-center md:justify-start">{icon}</div>
       <h3 className="text-2xl font-semibold mb-3 text-white">{title}</h3>
       <p className="text-gray-300 text-lg">{description}</p>
-    </motion.div>
+    </div>
   );
 };
 
 export default function Features() {
   const bannerSectionRef = useRef<HTMLDivElement>(null);
   const bannerRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress: bannerScrollProgress } = useScroll({
-    target: bannerSectionRef,
-    offset: ['start end', 'end start'],
-  });
-
-  const bannerY = useTransform(bannerScrollProgress, [0, 1], [0, 150]);
-  const opacity = useTransform(bannerScrollProgress, [0, 0.5, 1], [1, 0.8, 0.6]);
-  const scale = useTransform(bannerScrollProgress, [0, 1], [1, 1.1]);
-
   const featuresSectionRef = useRef<HTMLDivElement>(null);
+
+  // Removed scroll effects and animations
 
   return (
     <>
@@ -60,16 +45,11 @@ export default function Features() {
         <div
           ref={bannerRef}
           className="relative w-full h-[400px] sm:h-[500px] md:h-[600px] overflow-hidden rounded-2xl mx-auto max-w-7xl px-4"
-          style={{
-            transform: `translateY(${bannerY.get()}px)`,
-            opacity: opacity.get(),
-            scale: scale.get(),
-          }}
         >
           <div className="absolute inset-0 bg-gradient-to-t from-[#0c1222] via-transparent to-transparent z-10" />
           <div className="absolute inset-0 bg-gradient-to-r from-[#0c1222]/50 via-transparent to-[#0c1222]/50 z-10" />
 
-          <div className="absolute inset-0 z-0 transition-transform duration-500 ease-out hover:scale-105">
+          <div className="absolute inset-0 z-0">
             <Image
               src="/banner.png"
               alt="Friends App Banner"
@@ -105,7 +85,7 @@ export default function Features() {
               <FeatureCard
                 title="Create Records"
                 description="Add new entries by submitting name, email, age, and description."
-                icon={<span>➕</span>}
+                icon={<PlusCircle size={32} strokeWidth={1.5} />}
               />
             </div>
 
@@ -113,7 +93,7 @@ export default function Features() {
               <FeatureCard
                 title="Read & Search"
                 description="Fetch all records or a specific one using email as a query parameter."
-                icon={<span>🔍</span>}
+                icon={<Search size={32} strokeWidth={1.5} />}
               />
             </div>
 
@@ -121,7 +101,7 @@ export default function Features() {
               <FeatureCard
                 title="Update Information"
                 description="Modify any field in an existing record using a PUT request."
-                icon={<span>✏️</span>}
+                icon={<Edit size={32} strokeWidth={1.5} />}
               />
             </div>
 
@@ -129,7 +109,7 @@ export default function Features() {
               <FeatureCard
                 title="Delete Records"
                 description="Remove entries by targeting the email identifier in a DELETE request."
-                icon={<span>🗑️</span>}
+                icon={<Trash2 size={32} strokeWidth={1.5} />}
               />
             </div>
           </div>
@@ -139,7 +119,7 @@ export default function Features() {
               <FeatureCard
                 title="Data Visualization"
                 description="Connect your frontend to render friend data visually using maps or charts."
-                icon={<span>📊</span>}
+                icon={<BarChart3 size={32} strokeWidth={1.5} />}
               />
             </div>
           </div>
