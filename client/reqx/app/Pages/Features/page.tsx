@@ -30,8 +30,6 @@ export default function Features() {
   const bannerRef = useRef<HTMLDivElement>(null);
   const featuresSectionRef = useRef<HTMLDivElement>(null);
 
-  // Removed scroll effects and animations
-
   return (
     <>
       <section
@@ -52,7 +50,7 @@ export default function Features() {
           <div className="absolute inset-0 z-0">
             <Image
               src="/banner.png"
-              alt="Friends App Banner"
+              alt="Banner"
               fill
               style={{ objectFit: 'cover', objectPosition: 'center 20%' }}
               className="rounded-2xl"
@@ -75,7 +73,7 @@ export default function Features() {
             CRUD Functionality
           </h2>
           <p className="text-gray-300 max-w-3xl mx-auto text-xl md:text-2xl">
-            Core operations supported by the Friends API backend
+            Operations supported by the API backend
           </p>
         </div>
 
