@@ -5,7 +5,6 @@ import Globe from './Globe';
 import StarryBackground from '../../components/StarryBackground';
 
 export default function Hero() {
-  // Removed scroll effects
 
   return (
     <div className="min-h-screen pt-16 bg-[#0c1222] text-white overflow-hidden relative flex items-center">

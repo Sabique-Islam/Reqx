@@ -118,7 +118,7 @@ export default function Features() {
             <div className="md:col-span-3">
               <FeatureCard
                 title="Data Visualization"
-                description="Connect your frontend to render friend data visually using maps or charts."
+                description="View friend data visually."
                 icon={<BarChart3 size={32} strokeWidth={1.5} />}
               />
             </div>
