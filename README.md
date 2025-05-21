@@ -1,6 +1,6 @@
 # Reqx
 
-A RESTful API built in `C` using `libmicrohttpd` and `cJSON`.
+A REST API built in `C` using `libmicrohttpd` and `cJSON`.
 
 
 ## API Reference →
