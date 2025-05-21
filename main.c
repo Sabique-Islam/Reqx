@@ -18,7 +18,13 @@ struct PostRequestData {
 
 static enum MHD_Result send_json(struct MHD_Connection *conn, const char *json, int code) {
     struct MHD_Response *response = MHD_create_response_from_buffer(strlen(json), (void*)json, MHD_RESPMEM_MUST_COPY);
+    
+    MHD_add_response_header(response, "Access-Control-Allow-Origin", "https://reqx-client.vercel.app");
+    MHD_add_response_header(response, "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+    MHD_add_response_header(response, "Access-Control-Allow-Headers", "Content-Type");
+    MHD_add_response_header(response, "Access-Control-Max-Age", "86400");
     MHD_add_response_header(response, "Content-Type", "application/json");
+    
     enum MHD_Result ret = MHD_queue_response(conn, code, response);
     MHD_destroy_response(response);
     return ret;
@@ -43,8 +49,22 @@ static enum MHD_Result answer(void *cls, struct MHD_Connection *conn,
                   const char *version, const char *upload_data,
                   size_t *upload_data_size, void **con_cls) {
 
+    if (0 == strcmp(method, "OPTIONS")) {
+        struct MHD_Response *response = MHD_create_response_from_buffer(0, "", MHD_RESPMEM_PERSISTENT);
+        
+        MHD_add_response_header(response, "Access-Control-Allow-Origin", "https://reqx-client.vercel.app");
+        MHD_add_response_header(response, "Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        MHD_add_response_header(response, "Access-Control-Allow-Headers", "Content-Type");
+        MHD_add_response_header(response, "Access-Control-Max-Age", "86400");
+        
+        enum MHD_Result ret = MHD_queue_response(conn, MHD_HTTP_OK, response);
+        MHD_destroy_response(response);
+        return ret;
+    }
+
     if (0 != strcmp(method, "GET") && 0 != strcmp(method, "POST")
-        && 0 != strcmp(method, "PUT") && 0 != strcmp(method, "DELETE"))
+        && 0 != strcmp(method, "PUT") && 0 != strcmp(method, "DELETE")
+        && 0 != strcmp(method, "OPTIONS"))
         return MHD_NO;
 
     if (*con_cls == NULL) {
