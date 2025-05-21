@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Toaster } from 'react-hot-toast';
 import Navbar from "./Pages/Navbar/page";
 
 const inter = Inter({
@@ -24,6 +25,7 @@ export default function RootLayout({
         className={`${inter.variable} antialiased`}
       >
         <Navbar />
+        <Toaster position="top-center" />
         {children}
       </body>
     </html>
